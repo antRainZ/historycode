@@ -1,0 +1,18 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main(){
+string s[]= {"id" ,
+  "username" ,"sex"  ,"birth" , "ethnic"  ,"native" ,
+  "politic" , "mayor" ,"school"
+  ,"telephone" ,"email" ,
+  "skill" ,"experience" ,"evaluation","userid"};
+  int n=15;
+  cout<<" String sql = \" update resume set\"; "<<endl;
+  for(int i=1;i<n;i++){
+    string str = s[i];
+    cout<<"sql+=\" "<<str<<"='\"+";
+    str[0]=char(char(str[0])-32);
+    cout<<"resume.get"+str+"()+\"',\";"<<endl;
+  }
+  cout<<")";
+}
