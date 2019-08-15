@@ -1,0 +1,81 @@
+#include<bits/stdc++.h>
+using namespace std;
+const int maxn = 1e6+6;
+typedef long long ll;
+int x[4],y[4];
+bool f2(){
+    for(int i=0;i<2;i++)
+        if(x[i]!=x[i+2]||y[i]!=y[i+2])return false;
+    return true;
+}
+
+bool f3(){
+    if(x[2]>=x[1]||y[2]>=y[1])return true;
+    if(x[3]<=x[0]||y[3]<=y[0])return true;
+    if(x[0]>=x[2]&&y[0]>=y[2]&&x[1]<=x[3]&&y[1]<=y[3])return true;
+    if(x[2]>=x[0]&&y[2]>=y[0]&&x[3]<=x[1]&&y[3]<=y[1])return true;
+    return false;
+}
+
+bool f4(){
+    
+}
+
+bool f6(){
+    if(x[0]>x[2]&&x[1]<x[3]&&y[0]<y[2]&&y[1]>y[3])return true;
+    if(x[0]<x[2]&&x[1]>x[3]&&y[0]>y[2]&&y[1]<y[3])return true;
+    return false;
+}
+
+bool f5(){
+    if(x[0]==x[2]&&x[1]<x[3]&&y[0]<y[2]&&y[1]>y[3])return true;
+    if(x[0]>x[2]&&x[1]==x[3]&&y[0]<y[2]&&y[1]>y[3])return true;
+    if(x[0]>x[2]&&x[1]<x[3]&&y[0]==y[2]&&y[1]>y[3])return true;
+    if(x[0]>x[2]&&x[1]<x[3]&&y[0]<y[2]&&y[1]==y[3])return true;
+    if(x[0]==x[2]&&x[1]>x[3]&&y[0]>y[2]&&y[1]<y[3])return true;
+    if(x[0]<x[2]&&x[1]==x[3]&&y[0]>y[2]&&y[1]<y[3])return true;
+    if(x[0]<x[2]&&x[1]>x[3]&&y[0]==y[2]&&y[1]<y[3])return true;
+    if(x[0]<x[2]&&x[1]>x[3]&&y[0]>y[2]&&y[1]==y[3])return true;
+    return false;
+}
+
+int main(){
+    int t;
+    scanf("%d",&t);
+    while(t--){
+        for(int i=0;i<4;++i)scanf("%d%d",&x[i],&y[i]);
+        if(f2()){
+            printf("2\n");
+            continue;
+        }
+        if(f3()){
+            printf("3\n");
+            continue;
+        }
+        if(f6()){
+            printf("6\n");
+            continue;
+        }
+        if(f5()){
+            printf("5\n");
+            continue;
+        }
+        printf("4\n");
+        
+    }
+}
+/*
+10
+0 0 1 1 
+1 1 2 2 
+
+0 0 2 2 
+1 1 2 2 
+
+1 1 3 3
+0 0 4 4
+
+0 0 2 2 
+1 2 3 4
+
+*/
