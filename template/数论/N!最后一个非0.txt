@@ -1,0 +1,21 @@
+#include<bits/stdc++.h>
+using namespace std;
+const int maxn =1e4+4;
+int a[maxn];
+
+int f(int x){
+    while(x%10==0)x/=10;
+    return x%10;
+}
+
+int main(){
+    int n;
+    a[1]=a[0]=1;
+    int i = 1;
+    const int mod =  1e5;
+    for(int j = 2;j<maxn;++j)i = (f(j)*i)%mod,a[j]=i%10;
+    while(~scanf("%d",&n)){
+       printf("%-5d -> %d\n",n,a[n]);
+    }
+    return 0;
+}
