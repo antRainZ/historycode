@@ -88,3 +88,28 @@ int main(){
         cout<<endl;
     }
 }
+/*
+输入：
+11 10
+html
+..head
+....title
+..body
+....h1
+....p #subtitle
+....div #main
+......h2
+......p #one
+......div
+........p #two
+p
+#subtitle
+h3
+div p
+div div p
+#main h2
+#main #one
+#main p
+#main div #two
+#main h3
+*/
