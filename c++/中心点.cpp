@@ -1,5 +1,4 @@
 //题意，求最少添加多少点使得，在一个点集之中满足所有点能够找到一点关于相同点中心对称
-// 90
 #include<bits/stdc++.h>
 using namespace std;
 typedef pair<int,int> pa;
@@ -22,6 +21,10 @@ int main(){
         mm[pa(x,y)]++;
         
     }
+    if(n<=2){
+        printf("0\n");
+        return 0;
+    }
     for(int i=0;i<n;++i){
         for(int j=i+1;j<n;++j){
             x = (p[i].x+p[j].x)>>1;
@@ -30,9 +33,9 @@ int main(){
         }
     }
     int ans = 1<<28;
-    for(map<pa,int>::iterator i=m.begin();i!=m.end();++i
+    for(map<pa,int>::iterator i=m.begin();i!=m.end();++i){
         int t =n-2*(i->second)-mm[i->first];
-        printf("%d %d %d\n",t,i->first.first,i->first.second);
+        //printf("%d %d %d\n",t,i->first.first,i->first.second);
         if(t<ans)ans=t;
     }
     printf("%d\n",ans);
