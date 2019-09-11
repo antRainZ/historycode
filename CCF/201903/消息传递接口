@@ -1,0 +1,108 @@
+#include<bits/stdc++.h>
+using namespace std;
+const int maxn = 1e4+4;
+struct message{
+    int x,y;
+    bool flag;
+    message(){}
+    message(int a,int b,int f):x(a),y(b),flag(f){}
+};
+
+message msg[maxn][10];
+int num[maxn];//记录某个进程的消息的数目
+int t,n,k;//样例个数，进程个数
+string substr[10];//分割字符串
+int inx; //记录字串的数目
+string str;//目的串
+int s[maxn],r[maxn];//表示发送，与接受的第一个状态
+void split(){
+    int j = 0,k;
+    while(true){
+        k = str.find(" ",j);
+        if(k==string::npos)break;
+        substr[inx++]=str.substr(j,k-j);
+        j = k+1;
+    }
+    substr[inx++]=str.substr(j,str.size()-j);//截取最后一个字符
+}
+
+inline int to_int(string&s){
+    int sum  = 0;
+    for(int i=1;i<s.size();++i){
+        sum=sum*10+s[i]-'0';
+    }
+    return sum;
+}
+
+queue<message>q;//消息队列
+
+inline void push(int i){
+    if(num[i])q.push(msg[i][num[i]--]);
+}//将进程i的对头压进消息队列中
+
+int main(){
+    std::ios::sync_with_stdio(false);
+    cin.tie(0);
+    cout.tie(0);
+    cin>>t>>n;
+    cin.ignore();//忽视掉第一行未读取的换行符
+    while(t--){
+        for(int i=0;i<n;++i){
+            s[i]=r[i]=-1;
+            num[i]=0;
+        }//初始化
+        for(int i=0;i<n;++i){
+            getline(cin,str);
+            inx = 0;
+            split();
+            num[i]=inx;
+            for(int j=0;j<inx;++j){
+                k = inx-j;
+                msg[i][k].x=i;
+                msg[i][k].y=to_int(substr[j]);
+                msg[i][k].flag=substr[j][0]=='S'?1:0;
+            }
+
+        }
+        for(int i=0;i<n;++i)push(i);//将每个进程的第一个消息入队
+        int sum = 0,x,y;//记录尚未处理消息条数
+        message tmp;
+        while(!q.empty()){
+            tmp=q.front();
+            q.pop();
+            bool flag = false;//
+            x= tmp.x,y=tmp.y;
+            if(tmp.flag){
+                if(r[y]==x){
+                    flag=true;
+                    r[y]=-1;
+                    push(x);
+                    push(y);
+                }//若存在接受此消息的进程，将进程的下一条消息入队
+                else s[x]=y;
+            }else{
+                if(s[y]==x){
+                    flag=true;
+                    s[y]=-1;
+                    push(x);
+                    push(y);
+                }//若存在发送此消息的进程，将进程的下一条消息入队
+                else r[x]=y;
+            }
+            if(flag)sum--;
+            else sum++;
+        }
+        if(sum)cout<<"1\n";
+        else cout<<"0\n";
+    }
+
+}
+/*
+3 2
+R1 S1
+S0 R0
+R1 S1
+R0 S0
+R1 R1 R1 R1 S1 S1 S1 S1
+S0 S0 S0 S0 R0 R0 R0 R0
+*/
