@@ -2,7 +2,7 @@
 下面是一些这次比赛的较简单题目的题解
 [题解链接](https://ac.nowcoder.com/acm/contest/903?from=acm_calendar#question)
 # B Icebound and Sequence 
-求 $S=\sum_{i=1}^{n} q^i \pmod p $
+求 $$S=\sum_{i=1}^{n} q^i \pmod p $$
 思路：利用快速幂处理幂运算，对于除法的模运算处理
 （1）求逆元
 （2) 利用性质当$\frac{a}{b}\%p = \frac{a\%pb}{b} 其中b|a ,表示b能够整除a$ ,利用这个方法的时候，快速幂利用`long long`就不能容纳数据范围，利用
